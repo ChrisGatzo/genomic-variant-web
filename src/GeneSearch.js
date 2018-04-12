@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { searchGenes as searchGenesActionCreator } from './actions/search';
+import { getGenes } from './selectors/search';
 import { Search } from './components';
 
-export default class GeneSearch extends Component {
+class GeneSearch extends Component {
   state = {
     searchTerm: '',
   };
@@ -11,7 +14,9 @@ export default class GeneSearch extends Component {
   };
 
   handleSearchClick = () => {
-    console.log('perform searcb');
+    const { searchGenes } = this.props;
+    const { searchTerm } = this.state;
+    searchGenes(searchTerm);
   };
 
   render() {
@@ -28,3 +33,12 @@ export default class GeneSearch extends Component {
     );
   }
 }
+
+export default connect(
+  state => ({
+    genes: getGenes(state),
+  }),
+  dispatch => ({
+    searchGenes: searchTerm => dispatch(searchGenesActionCreator(searchTerm)),
+  }),
+)(GeneSearch);
