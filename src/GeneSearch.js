@@ -7,6 +7,7 @@ import {
 } from './actions/search';
 import { getGenes, getSuggestedGenes } from './selectors/search';
 import { GeneList, Search } from './components';
+import styles from './geneSearch.css';
 
 class GeneSearch extends Component {
   state = {
@@ -32,7 +33,7 @@ class GeneSearch extends Component {
     const { genes, suggestedGenes } = this.props;
 
     return (
-      <div>
+      <div className={styles.geneSearch}>
         <Search
           onChange={this.onChange}
           onClick={this.handleSearchClick}

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './search.css';
 
 export default function Search({
   onChange,
@@ -9,10 +10,10 @@ export default function Search({
   suggestedGenes,
 }) {
   return (
-    <div>
-      <input onChange={onChange} placeholder={placeholder} value={searchTerm} />
+    <div className={styles.search}>
+      <input className={styles.input} onChange={onChange} placeholder={placeholder} value={searchTerm} />
+      <button className={styles.searchButton} onClick={onClick}/>
       <div>{suggestedGenes && suggestedGenes.map(g => <p>{g}</p>)}</div>
-      <button onClick={onClick}>Search</button>
     </div>
   );
 }

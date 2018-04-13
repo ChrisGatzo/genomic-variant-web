@@ -1,0 +1,13 @@
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons-Final" transform="translate(-72.000000, -263.000000)"
+           stroke="#FFF">
+            <g id="Search-Gray" transform="translate(72.000000, 263.000000)">
+                <path d="M13.3384,13.3845 C10.3834,16.3135 5.6134,16.2935 2.6834,13.3385 C-0.2456,10.3835 -0.2256,5.6135 2.7294,2.6835 C5.6844,-0.2455 10.4554,-0.2255 13.3844,2.7295 C16.3144,5.6845 16.2934,10.4555 13.3384,13.3845 L13.3384,13.3845 Z" id="Stroke-1"></path>
+                <path d="M18.772,21.0336 L13.433,15.6486 L15.671,13.4296 L21.01,18.8146 C21.623,19.4326 21.618,20.4306 21,21.0436 L21,21.0436 C20.382,21.6556 19.385,21.6516 18.772,21.0336 L18.772,21.0336 Z" id="Stroke-3"></path>
+                <path d="M14.0036,12.5401 L15.2976,13.8461" id="Stroke-5" stroke-width="0.75"></path>
+                <path d="M12.5349,13.9962 L13.8289,15.3022" id="Stroke-7" stroke-width="0.75"></path>
+            </g>
+        </g>
+    </g>
+</svg>
