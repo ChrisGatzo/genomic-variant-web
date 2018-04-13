@@ -11,9 +11,22 @@ export default function Search({
 }) {
   return (
     <div className={styles.search}>
-      <input className={styles.input} onChange={onChange} placeholder={placeholder} value={searchTerm} />
-      <button className={styles.searchButton} onClick={onClick}/>
-      <div>{suggestedGenes && suggestedGenes.map(g => <p>{g}</p>)}</div>
+      <div className={styles.searchWrapper}>
+        <input
+          className={styles.input}
+          onChange={onChange}
+          placeholder={placeholder}
+          value={searchTerm}
+        />
+        <button className={styles.searchButton} onClick={onClick} />
+        {suggestedGenes && (
+          <ul className={styles.suggestionBox}>
+            {suggestedGenes.map(g => (
+              <li className={styles.suggestedGene}>{g}</li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
