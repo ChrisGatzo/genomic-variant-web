@@ -7,3 +7,10 @@ export function searchGenes(searchTerm) {
     payload: searchTerm,
   };
 }
+
+export function searchGenesSuccess(genes) {
+  return {
+    type: SEARCH_SUCCESS,
+    payload: genes,
+  }
+}
