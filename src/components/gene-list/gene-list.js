@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from './gene-list.css';
 
 export default function GeneList({ genes }) {
   const renderProp = value => (value ? value : '-');
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>Gene</th>

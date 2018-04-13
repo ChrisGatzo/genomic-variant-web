@@ -1,0 +1,20 @@
+.table {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.table td {
+  padding: 0.3rem;
+}
+
+.table th {
+  text-align: left;
+  background-color: #1a989e;
+  color: #ffffff;
+	font-size: 14px;
+	padding: 5px;
+}
+
+.table tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
