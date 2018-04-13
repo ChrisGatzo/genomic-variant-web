@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchGenes as searchGenesActionCreator } from './actions/search';
 import { getGenes } from './selectors/search';
-import { Search } from './components';
+import { GeneList, Search } from './components';
 
 class GeneSearch extends Component {
   state = {
@@ -21,6 +21,7 @@ class GeneSearch extends Component {
 
   render() {
     const { searchTerm } = this.state;
+    const { genes } = this.props;
 
     return (
       <div>
@@ -29,6 +30,7 @@ class GeneSearch extends Component {
           onClick={this.handleSearchClick}
           value={searchTerm}
         />
+        {genes && <GeneList genes={genes} />}
       </div>
     );
   }

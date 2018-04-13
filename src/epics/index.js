@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { combineEpics } from 'redux-observable';
 import { SEARCH_FETCH, searchGenesSuccess } from '../actions/search';
 
