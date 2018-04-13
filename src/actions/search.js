@@ -6,34 +6,34 @@ export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 
 export function autoComplete(searchTerm) {
   return {
-    type: AUTO_COMPLETE_FETCH,
     payload: searchTerm,
-  }
+    type: AUTO_COMPLETE_FETCH,
+  };
 }
 
 export function autoCompleteSuccess(suggestedGenes) {
   return {
-    type: AUTO_COMPLETE_SUCCESS,
     payload: suggestedGenes,
-  }
+    type: AUTO_COMPLETE_SUCCESS,
+  };
 }
 
 export function autoCompleteClear() {
   return {
     type: AUTO_COMPLETE_CLEAR,
-  }
+  };
 }
 
 export function searchGenes(searchTerm) {
   return {
-    type: SEARCH_FETCH,
     payload: searchTerm,
+    type: SEARCH_FETCH,
   };
 }
 
 export function searchGenesSuccess(genes) {
   return {
-    type: SEARCH_SUCCESS,
     payload: genes,
-  }
+    type: SEARCH_SUCCESS,
+  };
 }

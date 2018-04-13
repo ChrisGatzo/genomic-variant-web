@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { combineEpics } from 'redux-observable';
 import {
   AUTO_COMPLETE_FETCH,
@@ -57,7 +56,7 @@ function loadAutoCompleteEpic(action$) {
     .filter(action => action.payload && action.payload.length > 1)
     .map(
       ({ payload }) =>
-      // TODO remove this when backend is done
+        // TODO remove this when backend is done
         payload === 'ABB'
           ? autoCompleteSuccess([])
           : autoCompleteSuccess(suggestedGenes),
