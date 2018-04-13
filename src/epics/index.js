@@ -2,22 +2,11 @@ import { Observable } from 'rxjs';
 import { combineEpics } from 'redux-observable';
 import {
   AUTO_COMPLETE_FETCH,
-  autoCompleteClear,
   autoCompleteSuccess,
   SEARCH_FETCH,
   searchGenesSuccess,
 } from '../actions/search';
-
-const genomes = [
-  {
-    gene: 'CYFIP1',
-    source: 'ClinVar',
-  },
-  {
-    gene: 'DDX52',
-    source: 'ClinVar',
-  },
-];
+import { genes } from '../mocks/genes';
 
 const suggestedGenes = [
   'ABAT',
@@ -79,7 +68,7 @@ function loadGenesEpic(action$) {
   return action$
     .ofType(SEARCH_FETCH)
     .filter(action => action.payload !== '')
-    .mapTo(searchGenesSuccess(genomes));
+    .mapTo(searchGenesSuccess(genes));
 }
 
 export const rootEpic = combineEpics(loadAutoCompleteEpic, loadGenesEpic);
