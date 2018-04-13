@@ -21,8 +21,10 @@ export default function Search({
         <button className={styles.searchButton} onClick={onClick} />
         {suggestedGenes && (
           <ul className={styles.suggestionBox}>
-            {suggestedGenes.map(g => (
-              <li className={styles.suggestedGene}>{g}</li>
+            {suggestedGenes.map((g, i) => (
+              <li key={i} className={styles.suggestedGene}>
+                {g}
+              </li>
             ))}
           </ul>
         )}
@@ -32,9 +34,15 @@ export default function Search({
 }
 
 Search.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  searchTerm: PropTypes.string,
+  suggestedGenes: PropTypes.arrayOf(PropTypes.string),
 };
 
 Search.defaultProps = {
   placeholder: 'Search for genes',
+  searchTerm: undefined,
+  suggestedGenes: null,
 };

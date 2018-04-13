@@ -2,13 +2,13 @@ import {
   AUTO_COMPLETE_CLEAR,
   AUTO_COMPLETE_SUCCESS,
   SEARCH_FETCH,
-  SEARCH_SUCCESS
+  SEARCH_SUCCESS,
 } from '../actions/search';
 
 const initialState = {
   data: null,
-  suggestedGenes: null,
   isFetching: false,
+  suggestedGenes: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,8 +18,8 @@ export default function reducer(state = initialState, action) {
     }
     case SEARCH_SUCCESS: {
       return Object.assign({}, state, {
-        isFetching: false,
         data: action.payload,
+        isFetching: false,
       });
     }
     case AUTO_COMPLETE_SUCCESS: {

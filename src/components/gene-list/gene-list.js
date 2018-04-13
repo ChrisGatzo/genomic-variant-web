@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './gene-list.css';
 
 export default function GeneList({ genes }) {
-  const renderProp = value => (value ? value : '-');
+  const renderProp = value => value || '-';
 
   return (
     <table className={styles.table}>
@@ -20,8 +21,8 @@ export default function GeneList({ genes }) {
         </tr>
       </thead>
       <tbody>
-        {genes.map(g => (
-          <tr>
+        {genes.map((g, i) => (
+          <tr key={i}>
             <td>{renderProp(g.gene)}</td>
             <td>{renderProp(g.nucleotideChange)}</td>
             <td>{renderProp(g.proteinChange)}</td>
@@ -37,3 +38,7 @@ export default function GeneList({ genes }) {
     </table>
   );
 }
+
+GeneList.propTypes = {
+  genes: PropTypes.array,
+};

@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GeneSearch from './GeneSearch';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <GeneSearch />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <GeneSearch />
+    </div>
+  );
 }
 
 export default App;

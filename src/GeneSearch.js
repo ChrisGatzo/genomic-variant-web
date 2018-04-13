@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   autoComplete as autoCompleteActionCreator,
@@ -10,6 +11,19 @@ import { GeneList, Search } from './components';
 import styles from './geneSearch.css';
 
 class GeneSearch extends Component {
+  static propTypes = {
+    autoComplete: PropTypes.func.isRequired,
+    autoCompleteClear: PropTypes.func.isRequired,
+    genes: PropTypes.array,
+    searchGenes: PropTypes.func.isRequired,
+    suggestedGenes: PropTypes.array,
+  };
+
+  static defaultProps = {
+    genes: null,
+    suggestedGenes: null,
+  };
+
   state = {
     searchTerm: '',
   };
