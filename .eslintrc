@@ -1,0 +1,163 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "plugins": ["prettier", "react"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "__ENV__": true,
+    "browser": true,
+    "braintree": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "scripts/webpack.website-client.config.js"
+      }
+    }
+  },
+  "rules": {
+    "arrow-body-style": 0,
+    "arrow-parens": 0,
+    "camelcase": 2,
+    "comma-dangle": 0,
+    "eqeqeq": [2, "smart"],
+    "function-paren-newline": 0,
+    "generator-star-spacing": 0,
+    "global-require": 0,
+    "id-length": [2, { "exceptions": ["_", "e", "i", "x", "y"] }],
+    "indent": 0,
+    "import/default": 2,
+    "import/first": 0,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default-member": 1,
+    "import/prefer-default-export": 0,
+    "jsx-a11y/alt-text": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/img-has-alt": 0,
+    "jsx-a11y/interactive-supports-focus": 0,
+    "jsx-a11y/label-has-for": [0],
+    "jsx-a11y/mouse-events-have-key-events": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": 0,
+    "jsx-a11y/no-static-element-interactions": [0],
+    "jsx-a11y/media-has-caption": 0,
+    "max-len": [0, 80],
+    "mocha/no-exclusive-tests": "error",
+    "no-console": 2,
+    "no-else-return": 0,
+    "no-mixed-operators": 0,
+    "no-multi-spaces": 0,
+    "no-multiple-empty-lines": 0,
+    "no-param-reassign": [2, { "props": false }],
+    "no-underscore-dangle": 0,
+    "object-curly-newline": 0,
+    "operator-linebreak": 0,
+    "prettier/prettier": "error",
+    "react/default-props-match-prop-types": 0, // TODO(jg): temporarily suppressed
+    "react/forbid-prop-types": [0, { "forbid": ["any", "array", "object"] }], // TODO(jg): temporarily suppressed
+    "react/jsx-sort-props": [
+      2,
+      {
+        "callbacksLast": true,
+        "shorthandFirst": false,
+        "shorthandLast": false,
+        "ignoreCase": false,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
+    ],
+    "react/jsx-boolean-value": [2, "always"],
+    "react/jsx-filename-extension": 0,
+    "react/jsx-handler-names": 0,
+    "react/jsx-indent": 0,
+    // TODO(jg): temporarily suppressed arrow function bindings
+    // Ticket to be addressed on EN-582
+    "react/jsx-no-bind": [
+      2,
+      {
+        "allowArrowFunctions": true
+      }
+    ],
+    "react/jsx-wrap-multilines": 0,
+    "react/no-array-index-key": 0, // TODO(jg): temporarily suppressed
+    "react/no-danger": 0,
+    "react/no-string-refs": 0,
+    "react/no-unused-prop-types": 0,
+    "react/no-unused-state": 0,
+    "react/prefer-stateless-function": 2,
+    "react/prop-types": 2,
+    "react/require-default-props": 0, // TODO(jg): temporarily suppressed
+    "react/require-extension": 0,
+    "react/sort-comp": [
+      2,
+      {
+        "order": [
+          "type-annotations",
+          "static-methods",
+          "lifecycle",
+          "everything-else",
+          "render"
+        ]
+      }
+    ],
+    "react/sort-prop-types": [
+      2,
+      {
+        "callbacksLast": false,
+        "ignoreCase": true,
+        "requiredFirst": false
+      }
+    ],
+    "require-jsdoc": [
+      0,
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": false,
+          "ClassDeclaration": false
+        }
+      }
+    ],
+    "sort-vars": 2,
+    "sort-keys": [
+      2,
+      "asc",
+      {
+        "caseSensitive": false,
+        "natural": false
+      }
+    ],
+    "valid-jsdoc": [
+      2,
+      {
+        "prefer": {
+          "return": "return"
+        },
+        "preferType": {
+          "Boolean": "boolean",
+          "Number": "number",
+          "object": "Object",
+          "String": "string"
+        },
+        "requireReturn": false,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": false
+      }
+    ]
+  }
+}
