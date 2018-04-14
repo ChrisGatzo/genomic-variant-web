@@ -85,7 +85,7 @@ class GeneSearch extends Component {
           isSuggestionBoxActive={isSuggestionBoxActive}
           setRef={this.setRef}
           suggestedGenes={suggestedGenes}
-          value={searchTerm}
+          searchTerm={searchTerm}
         />
         {genes && <GeneList genes={genes} />}
       </div>
