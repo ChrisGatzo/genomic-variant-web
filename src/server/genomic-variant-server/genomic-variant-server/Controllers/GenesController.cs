@@ -16,7 +16,7 @@ namespace genomicvariantserver
         public IList<GenomicVariant> Search(string searchTerm)
         {
             var geneSearchService = new GeneSearchService();
-            return geneSearchService.GetGenomicVariants();
+            return geneSearchService.SearchGenomicVariants(searchTerm);
         }
 
         // GET api/genes/autocomplete?searchTerm={searchTerm}
