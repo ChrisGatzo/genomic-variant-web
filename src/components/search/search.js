@@ -6,6 +6,7 @@ export default function Search({
   isSuggestionBoxActive,
   onChange,
   onClick,
+  onSuggestionClick,
   placeholder,
   searchTerm,
   setRef,
@@ -25,7 +26,11 @@ export default function Search({
           isSuggestionBoxActive && (
             <ul ref={setRef} className={styles.suggestionBox}>
               {suggestedGenes.map((g, i) => (
-                <li key={i} className={styles.suggestedGene}>
+                <li
+                  key={i}
+                  className={styles.suggestedGene}
+                  onClick={onSuggestionClick}
+                >
                   {g}
                 </li>
               ))}
@@ -40,6 +45,7 @@ Search.propTypes = {
   isSuggestionBoxActive: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  onSuggestionClick: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   searchTerm: PropTypes.string,
   setRef: PropTypes.func.isRequired,

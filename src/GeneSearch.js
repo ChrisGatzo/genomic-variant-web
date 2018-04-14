@@ -43,6 +43,12 @@ class GeneSearch extends Component {
     }
   };
 
+  handleSearchClick = () => {
+    const { searchGenes } = this.props;
+    const { searchTerm } = this.state;
+    searchGenes(searchTerm);
+  };
+
   onChange = e => {
     const searchTerm = e.target.value;
     this.setState({ searchTerm });
@@ -52,10 +58,14 @@ class GeneSearch extends Component {
     this.setState({ isSuggestionBoxActive: true });
   };
 
-  handleSearchClick = () => {
-    const { searchGenes } = this.props;
-    const { searchTerm } = this.state;
-    searchGenes(searchTerm);
+  onSuggestionClick = e => {
+    this.setState(
+      {
+        isSuggestionBoxActive: false,
+        searchTerm: e.target.innerText,
+      },
+      () => this.handleSearchClick(),
+    );
   };
 
   setRef = input => {
@@ -71,6 +81,7 @@ class GeneSearch extends Component {
         <Search
           onChange={this.onChange}
           onClick={this.handleSearchClick}
+          onSuggestionClick={this.onSuggestionClick}
           isSuggestionBoxActive={isSuggestionBoxActive}
           setRef={this.setRef}
           suggestedGenes={suggestedGenes}
