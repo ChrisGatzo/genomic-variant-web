@@ -25,6 +25,16 @@ namespace genomic_variant_server
         {
             services.AddMemoryCache();
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllHeaders",
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                      });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +45,7 @@ namespace genomic_variant_server
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAllHeaders");
             app.UseMvc();
         }
     }
