@@ -18,8 +18,10 @@ namespace genomicvariantserver.Services
         {
             var genes = GetGenomicVariants();
 
-            return genes.ContainsKey(searchTerm) ?
-                        genes[searchTerm] :
+            var toUpperSearchTerm = searchTerm?.ToUpper();
+
+            return genes.ContainsKey(toUpperSearchTerm) ?
+                        genes[toUpperSearchTerm] :
                         new List<GenomicVariant>();
         }
 
@@ -27,9 +29,11 @@ namespace genomicvariantserver.Services
         {
             var genes = GetGenomicVariants();
 
+            var toUpperSearchTerm = searchTerm?.ToUpper();
+
             List<string> keyList = new List<string>(genes.Keys);
             return keyList
-                .Where(k => k.StartsWith(searchTerm, System.StringComparison.Ordinal))
+                .Where(k => k.StartsWith(toUpperSearchTerm, System.StringComparison.Ordinal))
                 .ToList();
         }
 
