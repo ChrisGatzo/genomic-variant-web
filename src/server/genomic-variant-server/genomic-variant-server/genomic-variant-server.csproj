@@ -26,6 +26,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\variant_results_small.tsv" />
-    <None Remove="Data\variant_results.tsv" />
   </ItemGroup>
 </Project>
