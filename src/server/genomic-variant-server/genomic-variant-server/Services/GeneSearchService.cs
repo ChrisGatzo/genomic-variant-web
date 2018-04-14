@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using FlatFiles;
-using FlatFiles.TypeMapping;
+﻿using System.Collections.Generic;
 
 namespace genomicvariantserver.Services
 {
     public class GeneSearchService
     {
+        private readonly ICacheService _cacheService;
         private readonly GeneService _geneService;
 
-        public GeneSearchService()
+        public GeneSearchService(ICacheService cacheService)
         {
+            _cacheService = cacheService;
             _geneService = new GeneService();
         }
 
@@ -27,14 +24,13 @@ namespace genomicvariantserver.Services
 
         private Dictionary<string, List<GenomicVariant>> GetGenomicVariants()
         {
-            // TODO read genes dictionary from cache
-            // cacheService.ReadGenes();
-            // If cache is empty 
-            var genomicVariants = _geneService.ReadGenomicVariantsFromTsv();
-            var genomicVariantsDictionary = 
-                _geneService.MapGenomicVariantsToDictionary(genomicVariants);
-            // store result to cache
-            // cacheService.StoreGenes(dictionary);
+            var genomicVariantsDictionary = _cacheService.TryGetGenomicVariants();
+            if (genomicVariantsDictionary == null) {
+                var genomicVariants = _geneService.ReadGenomicVariantsFromTsv();
+                genomicVariantsDictionary =
+                    _geneService.MapGenomicVariantsToDictionary(genomicVariants);
+                _cacheService.StoreGenomicVariants(genomicVariantsDictionary);   
+            }
 
             return genomicVariantsDictionary;
         }
