@@ -12,7 +12,8 @@ namespace genomicvariantserver
         public string Source { get; set; }
         public string ReportedAlt { get; set; }
         public string ReportedRef { get; set; }
-        public string AltAccession { get; set; }
+        public string Alt { get; set; }
+        public string Accession { get; set; }
         public string Ref { get; set; }
         public string GenomicStop { get; set; }
         public string GenomicStart { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using FlatFiles;
 using FlatFiles.TypeMapping;
@@ -19,24 +20,18 @@ namespace genomicvariantserver
 
         public List<GenomicVariant> ReadGenomicVariantsFromTsv()
         {
-            // TODO Fix to parse correctly
-            // Fake data until parsing is fixed
-            var genomicVariants = new List<GenomicVariant>() {
-                new GenomicVariant { Gene = "CYFIP1", ProteinChange = "p.Ile1000Val" },
-                new GenomicVariant { Gene = "CYFIP1", ProteinChange = "p.Cys972Tyr" },
-                new GenomicVariant { Gene = "CYFIP1", ProteinChange = "p.Arg704His" },
-                new GenomicVariant { Gene = "CYFIP1", ProteinChange = "" },
-                new GenomicVariant { Gene = "DDX52", ProteinChange = "p.Ile1000Val" },
-                new GenomicVariant { Gene = "AMY1A", ProteinChange = "p.Ile1000Val" },
-                new GenomicVariant { Gene = "AMY1A", ProteinChange = "p.Ile1000Val" },
-                new GenomicVariant { Gene = "AMY1A", ProteinChange = "p.Ile1000Val" },
-            };
+            var genomicVariants = new List<GenomicVariant>();
             var mapper = SeparatedValueTypeMapper.Define<GenomicVariant>();
             var options = new SeparatedValueOptions
             {
-                // PartitionedRecordFilter = (values) => values.Length < 10
                 Separator = "\t",
+                RecordSeparator = "\n",
+                PreserveWhiteSpace = false,
+                // TODO values.Length != 2 is temporary workaround to fix bug with reading less columns
+                PartitionedRecordFilter = (values) => string.IsNullOrEmpty(values[0]) || values.Length != 23,
                 IsFirstRecordSchema = true,
+                QuoteBehavior = QuoteBehavior.Default,
+                Quote = '`'
             };
 
             mapper.Property(c => c.Gene).ColumnName("Gene");
@@ -58,14 +53,15 @@ namespace genomicvariantserver
             mapper.Property(c => c.GenomicStart).ColumnName("Genomic Start");
             mapper.Property(c => c.GenomicStop).ColumnName("Genomic Stop");
             mapper.Property(c => c.Ref).ColumnName("Ref");
-            mapper.Property(c => c.AltAccession).ColumnName("Alt Accession");
+            mapper.Property(c => c.Alt).ColumnName("Alt");
+            mapper.Property(c => c.Accession).ColumnName("Accession");
             mapper.Property(c => c.ReportedRef).ColumnName("Reported Ref");
             mapper.Property(c => c.ReportedAlt).ColumnName("Reported Alt");
 
-            //using (StreamReader reader = new StreamReader(File.OpenRead(@"Data/variant_results_small.tsv")))
-            //{
-            //    genomicVariants = mapper.Read(reader, options).ToList();
-            //}
+            using (StreamReader reader = new StreamReader(File.OpenRead(@"Data/variant_results.tsv")))
+            {
+                genomicVariants = mapper.Read(reader, options).ToList();
+            }
 
             return genomicVariants;
         }

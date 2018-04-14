@@ -24,4 +24,7 @@
     <Compile Remove="Controllers\ValuesController.cs" />
     <Compile Remove="Services\GeneServiceTests.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\variant_results_small.tsv" />
+  </ItemGroup>
 </Project>
