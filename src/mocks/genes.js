@@ -103,7 +103,13 @@ export const genes = [
   },
   {
     gene: 'CYFIP1',
-    nucleotideChange: null,
+    nucleotideChange: [
+      'NM_001271885.1:c.124+1G>T',
+      'NM_024666.4:c.451+1G>T',
+      'NG_033007.1:g.24221G>T',
+      'NC_000015.10:g.67235978C>A',
+      'NC_000015.9:g.67528316C>A',
+    ],
     proteinChange: null,
     otherMappings:
       'NC_000015.10:g.(?_22572858)_(23012211_?)del,NC_000015.9:g.(?_22860857)_(23300238_?)del',

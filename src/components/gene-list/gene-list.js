@@ -24,14 +24,23 @@ export default function GeneList({ genes }) {
         {genes.map((g, i) => (
           <tr key={i}>
             <td>{renderProp(g.gene)}</td>
-            <td>{renderProp(g.nucleotideChange)}</td>
+            <td>
+              {g.nucleotideChange &&
+                g.nucleotideChange.map((n, j) => (
+                  <p key={j} className={styles.nucleotideChange}>
+                    {n}
+                  </p>
+                ))}
+            </td>
             <td>{renderProp(g.proteinChange)}</td>
             <td>{renderProp(g.alias)}</td>
             <td>{renderProp(g.region)}</td>
             <td>{renderProp(g.reportedClassification)}</td>
             <td>{renderProp(g.lastEvaluated)}</td>
             <td>{renderProp(g.lastUpdated)}</td>
-            <td>{renderProp(g.moreInfo)}</td>
+            <td>
+              <a href={g.url}>{g.source}</a>
+            </td>
           </tr>
         ))}
       </tbody>

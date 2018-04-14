@@ -18,3 +18,7 @@
 .table tr:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+.nucleotideChange {
+  margin: 0;
+}

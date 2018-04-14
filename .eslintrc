@@ -129,7 +129,7 @@
     ],
     "sort-vars": 2,
     "sort-keys": [
-      1,
+      0,
       "asc",
       {
         "caseSensitive": false,
