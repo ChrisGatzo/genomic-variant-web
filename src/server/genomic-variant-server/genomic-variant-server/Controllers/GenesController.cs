@@ -31,9 +31,11 @@ namespace genomicvariantserver
         // GET api/genes/autocomplete?searchTerm={searchTerm}
         [HttpGet]
         [Route("autocomplete")]
-        public string Autocomplete(string searchTerm)
+        public IList<string> Autocomplete(string searchTerm)
         {
-            return searchTerm;
+            var cacheService = new InMemoryCacheService(_cache);
+            var geneSearchService = new GeneSearchService(cacheService);
+            return geneSearchService.SearchAutocompleteGenes(searchTerm);
         }
     }
 }

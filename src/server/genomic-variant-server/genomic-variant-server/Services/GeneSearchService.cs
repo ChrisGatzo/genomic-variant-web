@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace genomicvariantserver.Services
 {
@@ -20,6 +21,16 @@ namespace genomicvariantserver.Services
             return genes.ContainsKey(searchTerm) ?
                         genes[searchTerm] :
                         new List<GenomicVariant>();
+        }
+
+        public List<string> SearchAutocompleteGenes(string searchTerm) 
+        {
+            var genes = GetGenomicVariants();
+
+            List<string> keyList = new List<string>(genes.Keys);
+            return keyList
+                .Where(k => k.StartsWith(searchTerm, System.StringComparison.Ordinal))
+                .ToList();
         }
 
         private Dictionary<string, List<GenomicVariant>> GetGenomicVariants()
