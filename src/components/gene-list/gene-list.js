@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './gene-list.css';
+import ExpandingColumn from '../expanding-column/expanding-column';
 
 export default function GeneList({ genes }) {
   const renderProp = value => value || '-';
@@ -25,12 +26,7 @@ export default function GeneList({ genes }) {
           <tr key={i}>
             <td>{renderProp(g.gene)}</td>
             <td>
-              {g.otherMappings &&
-                g.otherMappings.split(',').map((n, j) => (
-                  <p key={j} className={styles.otherMappings}>
-                    {n}
-                  </p>
-                ))}
+              <ExpandingColumn values={g.otherMappings} />
             </td>
             <td>{renderProp(g.proteinChange)}</td>
             <td>{renderProp(g.alias)}</td>
@@ -39,7 +35,9 @@ export default function GeneList({ genes }) {
             <td>{renderProp(g.lastEvaluated)}</td>
             <td>{renderProp(g.lastUpdated)}</td>
             <td>
-              <a href={g.url}>{g.source}</a>
+              <a href={g.url} target="_blank">
+                {g.source}
+              </a>
             </td>
           </tr>
         ))}

@@ -5,6 +5,7 @@
 
 .table td {
   padding: 0.3rem;
+  vertical-align: top;
 }
 
 .table th {
@@ -17,8 +18,4 @@
 
 .table tr:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.05);
-}
-
-.otherMappings {
-  margin: 0;
 }

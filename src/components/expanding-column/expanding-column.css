@@ -1,0 +1,32 @@
+.toggleExpander {
+  position: relative;
+  max-height: 15px;
+  overflow: hidden;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.otherMappings {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.visible {
+  max-height: 50px;
+}
+
+.arrowWrapper {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+}
+
+.arrow {
+  transition: all 0.2s ease;
+  height: 15px;
+  width: 15px;
+}
+
+.open {
+  transform: rotate(90deg);
+}
