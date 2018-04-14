@@ -25,9 +25,9 @@ export default function GeneList({ genes }) {
           <tr key={i}>
             <td>{renderProp(g.gene)}</td>
             <td>
-              {g.nucleotideChange &&
-                g.nucleotideChange.map((n, j) => (
-                  <p key={j} className={styles.nucleotideChange}>
+              {g.otherMappings &&
+                g.otherMappings.split(',').map((n, j) => (
+                  <p key={j} className={styles.otherMappings}>
                     {n}
                   </p>
                 ))}
