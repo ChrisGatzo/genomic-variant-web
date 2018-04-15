@@ -1,0 +1,2 @@
+@custom-media --medium-device (width > 480px);
+@custom-media --large-device (width > 768px);
