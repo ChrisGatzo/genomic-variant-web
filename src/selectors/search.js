@@ -7,3 +7,7 @@ export const getSuggestedGenes = R.pipe(
   R.prop('suggestedGenes'),
 );
 export const getSearchInProgress = R.pipe(getSearchState, R.prop('isFetching'));
+export const getIsAutoCompleteLoading = R.pipe(
+  getSearchState,
+  R.prop('isAutoCompleteFetching'),
+);

@@ -8,6 +8,7 @@ import {
 } from './actions/search';
 import {
   getGenes,
+  getIsAutoCompleteLoading,
   getSearchInProgress,
   getSuggestedGenes,
 } from './selectors/search';
@@ -19,6 +20,7 @@ class GeneSearch extends Component {
     autoComplete: PropTypes.func.isRequired,
     autoCompleteClear: PropTypes.func.isRequired,
     genes: PropTypes.array,
+    isAutoCompleteLoading: PropTypes.bool.isRequired,
     isSearchInProgress: PropTypes.bool.isRequired,
     searchGenes: PropTypes.func.isRequired,
     suggestedGenes: PropTypes.array,
@@ -79,7 +81,12 @@ class GeneSearch extends Component {
 
   render() {
     const { isSuggestionBoxActive, searchTerm } = this.state;
-    const { genes, isSearchInProgress, suggestedGenes } = this.props;
+    const {
+      genes,
+      isAutoCompleteLoading,
+      isSearchInProgress,
+      suggestedGenes,
+    } = this.props;
 
     return (
       <div className={styles.geneSearch}>
@@ -87,6 +94,7 @@ class GeneSearch extends Component {
           onChange={this.onChange}
           onClick={this.handleSearchClick}
           onSuggestionClick={this.onSuggestionClick}
+          isAutoCompleteLoading={isAutoCompleteLoading}
           isSuggestionBoxActive={isSuggestionBoxActive}
           setRef={this.setRef}
           suggestedGenes={suggestedGenes}
@@ -102,6 +110,7 @@ class GeneSearch extends Component {
 export default connect(
   state => ({
     genes: getGenes(state),
+    isAutoCompleteLoading: getIsAutoCompleteLoading(state),
     isSearchInProgress: getSearchInProgress(state),
     suggestedGenes: getSuggestedGenes(state),
   }),

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './search.css';
 
 export default function Search({
+  isAutoCompleteLoading,
   isSuggestionBoxActive,
   onChange,
   onClick,
@@ -36,12 +37,20 @@ export default function Search({
               ))}
             </ul>
           )}
+        {isAutoCompleteLoading && (
+          <ul className={styles.suggestionBox}>
+            <li className={styles.suggestedGene}>
+              autocomplete in progress...
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );
 }
 
 Search.propTypes = {
+  isAutoCompleteLoading: PropTypes.bool.isRequired,
   isSuggestionBoxActive: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
