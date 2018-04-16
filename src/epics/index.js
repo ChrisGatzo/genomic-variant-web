@@ -17,6 +17,7 @@ function loadAutoCompleteEpic(action$) {
     .mergeMap(({ payload }) =>
       ajax
         .getJSON(`${api}/genes/autocomplete?searchTerm=${payload}`)
+        .takeUntil(action$.ofType(SEARCH_FETCH))
         .map(response => autoCompleteSuccess(response)),
     );
 }

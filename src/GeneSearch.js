@@ -6,7 +6,11 @@ import {
   autoCompleteClear as autoCompleteClearActionCreator,
   searchGenes as searchGenesActionCreator,
 } from './actions/search';
-import { getGenes, getSuggestedGenes } from './selectors/search';
+import {
+  getGenes,
+  getSearchInProgress,
+  getSuggestedGenes,
+} from './selectors/search';
 import { GeneList, Search } from './components';
 import styles from './geneSearch.css';
 
@@ -15,6 +19,7 @@ class GeneSearch extends Component {
     autoComplete: PropTypes.func.isRequired,
     autoCompleteClear: PropTypes.func.isRequired,
     genes: PropTypes.array,
+    isSearchInProgress: PropTypes.bool.isRequired,
     searchGenes: PropTypes.func.isRequired,
     suggestedGenes: PropTypes.array,
   };
@@ -74,7 +79,7 @@ class GeneSearch extends Component {
 
   render() {
     const { isSuggestionBoxActive, searchTerm } = this.state;
-    const { genes, suggestedGenes } = this.props;
+    const { genes, isSearchInProgress, suggestedGenes } = this.props;
 
     return (
       <div className={styles.geneSearch}>
@@ -87,7 +92,8 @@ class GeneSearch extends Component {
           suggestedGenes={suggestedGenes}
           searchTerm={searchTerm}
         />
-        {genes && <GeneList genes={genes} />}
+        {isSearchInProgress && <p>search in progress...</p>}
+        {!isSearchInProgress && genes && <GeneList genes={genes} />}
       </div>
     );
   }
@@ -96,6 +102,7 @@ class GeneSearch extends Component {
 export default connect(
   state => ({
     genes: getGenes(state),
+    isSearchInProgress: getSearchInProgress(state),
     suggestedGenes: getSuggestedGenes(state),
   }),
   dispatch => ({
