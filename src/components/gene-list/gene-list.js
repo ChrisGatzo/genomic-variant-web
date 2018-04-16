@@ -23,6 +23,13 @@ export default function GeneList({ genes }) {
           </tr>
         </thead>
         <tbody>
+          {genes.length === 0 && (
+            <tr>
+              <td colSpan="9" className={styles.noResults}>
+                No Results
+              </td>
+            </tr>
+          )}
           {genes.map((g, i) => (
             <tr key={i}>
               <td>{renderProp(g.gene)}</td>
@@ -50,4 +57,8 @@ export default function GeneList({ genes }) {
 
 GeneList.propTypes = {
   genes: PropTypes.array,
+};
+
+GeneList.defaultProps = {
+  genes: [],
 };
