@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using genomicvariantserver;
+using genomicvariantserver.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace genomic_variant_server
 {
@@ -35,6 +31,8 @@ namespace genomic_variant_server
                                  .AllowAnyMethod();
                       });
             });
+            services.AddTransient<IGeneSearchService, GeneSearchService>();
+            services.AddTransient<ICacheService, InMemoryCacheService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

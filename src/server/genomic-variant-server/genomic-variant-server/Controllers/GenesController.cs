@@ -12,10 +12,12 @@ namespace genomicvariantserver
     public class GenesController : Controller
     {
         private IMemoryCache _cache;
+        private readonly IGeneSearchService _geneSearchService;
 
-        public GenesController(IMemoryCache memoryCache)
+        public GenesController(IMemoryCache memoryCache, IGeneSearchService geneSearchService)
         {
             _cache = memoryCache;
+            _geneSearchService = geneSearchService;
         }
 
         // GET: api/genes/search?searchTerm={searchTerm}
@@ -23,9 +25,7 @@ namespace genomicvariantserver
         [Route("search")]
         public IList<GenomicVariant> Search(string searchTerm)
         {
-            var cacheService = new InMemoryCacheService(_cache);
-            var geneSearchService = new GeneSearchService(cacheService);
-            return geneSearchService.SearchGenomicVariants(searchTerm);
+            return _geneSearchService.SearchGenomicVariants(searchTerm);
         }
 
         // GET api/genes/autocomplete?searchTerm={searchTerm}
@@ -33,9 +33,7 @@ namespace genomicvariantserver
         [Route("autocomplete")]
         public IList<string> Autocomplete(string searchTerm)
         {
-            var cacheService = new InMemoryCacheService(_cache);
-            var geneSearchService = new GeneSearchService(cacheService);
-            return geneSearchService.SearchAutocompleteGenes(searchTerm);
+            return _geneSearchService.SearchAutocompleteGenes(searchTerm);
         }
     }
 }

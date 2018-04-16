@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace genomicvariantserver.Services
 {
-    public class GeneSearchService
+    public class GeneSearchService : IGeneSearchService
     {
         private readonly ICacheService _cacheService;
         private readonly GeneService _geneService;
