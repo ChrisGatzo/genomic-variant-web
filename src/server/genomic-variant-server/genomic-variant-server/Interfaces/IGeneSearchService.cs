@@ -6,5 +6,6 @@ namespace genomicvariantserver.Services
     {
         List<string> SearchAutocompleteGenes(string searchTerm);
         List<GenomicVariant> SearchGenomicVariants(string searchTerm);
+        Dictionary<string, List<GenomicVariant>> GetGenomicVariants();
     }
 }

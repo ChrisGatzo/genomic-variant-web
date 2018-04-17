@@ -33,6 +33,7 @@ namespace genomic_variant_server
             });
             services.AddTransient<IGeneSearchService, GeneSearchService>();
             services.AddTransient<ICacheService, InMemoryCacheService>();
+            services.AddTransient<IGeneService, GeneService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

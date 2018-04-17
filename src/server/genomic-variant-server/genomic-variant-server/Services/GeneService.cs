@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FlatFiles;
@@ -7,7 +6,7 @@ using FlatFiles.TypeMapping;
 
 namespace genomicvariantserver
 {
-    public class GeneService
+    public class GeneService : IGeneService
     {
         public Dictionary<string, List<GenomicVariant>> MapGenomicVariantsToDictionary(
             List<GenomicVariant> genomicVariants
@@ -27,7 +26,7 @@ namespace genomicvariantserver
                 Separator = "\t",
                 RecordSeparator = "\n",
                 PreserveWhiteSpace = false,
-                // TODO values.Length != 2 is temporary workaround to fix bug with reading less columns
+                // TODO values.Length != 23 is temporary workaround to fix bug with reading less columns
                 PartitionedRecordFilter = (values) => string.IsNullOrEmpty(values[0]) || values.Length != 23,
                 IsFirstRecordSchema = true,
                 QuoteBehavior = QuoteBehavior.Default,

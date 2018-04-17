@@ -6,12 +6,12 @@ namespace genomicvariantserver.Services
     public class GeneSearchService : IGeneSearchService
     {
         private readonly ICacheService _cacheService;
-        private readonly GeneService _geneService;
+        private readonly IGeneService _geneService;
 
-        public GeneSearchService(ICacheService cacheService)
+        public GeneSearchService(ICacheService cacheService, IGeneService geneService)
         {
             _cacheService = cacheService;
-            _geneService = new GeneService();
+            _geneService = geneService;
         }
 
         public List<GenomicVariant> SearchGenomicVariants(string searchTerm)
@@ -37,7 +37,7 @@ namespace genomicvariantserver.Services
                 .ToList();
         }
 
-        private Dictionary<string, List<GenomicVariant>> GetGenomicVariants()
+        public Dictionary<string, List<GenomicVariant>> GetGenomicVariants()
         {
             var genomicVariantsDictionary = _cacheService.TryGetGenomicVariants();
             if (genomicVariantsDictionary == null) {

@@ -8,7 +8,7 @@ namespace genomic_variant_server_tests
     public class GeneServiceTests
     {
         [Fact]
-        public void When_GivenAListOfGenomicVariants_Then_ReturnsDictionary()
+        public void MapGenomicVariantsToDictionary_When_GivenAListOfGenomicVariants_Then_ReturnsDictionary()
         {
             var geneService = new GeneService();
             var list = new List<GenomicVariant> {
