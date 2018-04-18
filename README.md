@@ -41,3 +41,5 @@ To run web tests from the root folder execute
 ```sh
 yarn test
 ```
+
+This script implicitly runs jest to test all the files ending in *.test.js
