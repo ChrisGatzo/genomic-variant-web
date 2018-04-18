@@ -1,23 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import reducer from './reducers/root-reducer';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { createEpicMiddleware } from 'redux-observable';
-import { rootEpic } from './epics/index';
+import { configureStore } from './configureStore';
 
 import './index.css';
 
-const epicMiddleware = createEpicMiddleware(rootEpic);
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(epicMiddleware)),
-);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>

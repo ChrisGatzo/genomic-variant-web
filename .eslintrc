@@ -17,7 +17,6 @@
   "globals": {
     "__ENV__": true,
     "browser": true,
-    "braintree": true
   },
   "settings": {
     "import/resolver": {
