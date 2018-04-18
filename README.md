@@ -34,3 +34,10 @@ Make sure you have yarn installed by running `yarn -v`. If not you can find inst
 yarn install
 yarn start
 ```
+
+## Web tests
+To run web tests from the root folder execute
+
+```sh
+yarn test
+```
