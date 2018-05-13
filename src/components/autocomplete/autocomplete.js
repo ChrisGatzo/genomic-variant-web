@@ -1,40 +1,39 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, withState } from 'recompose';
 import { withClickOutside } from '../../enhancers/withClickOutside';
 import SuggestionList from './suggestion-list';
 
 const enhance = compose(
   withClickOutside,
+  withState('value', 'setValue', null),
   withHandlers(() => ({
-    onItemClick: ({ onItemClick, setIsCollapsed }) => event => {
-      setIsCollapsed(true);
-      onItemClick(event);
+    onClick: ({ onClick, value }) => () => {
+      onClick(value);
     },
-    onValueChange: ({ onChange, setIsCollapsed }) => event => {
+    onItemClick: ({ onItemClick, setIsCollapsed }) => e => {
+      setIsCollapsed(true);
+      onItemClick(e.target.innerText);
+    },
+    onChange: ({ onChange, setIsCollapsed, setValue }) => e => {
       setIsCollapsed(false);
-      onChange(event);
+      setValue(e.target.value);
+      onChange(e.target.value);
     },
   })),
 );
 
 function Autocomplete({
-  onValueChange,
+  onChange,
+  onClick,
   placeholder,
-  value,
   theme: { button, input, ...otherThemeProps },
-  onButtonClick,
   ...otherProps
 }) {
   return (
     <Fragment>
-      <input
-        className={input}
-        onChange={onValueChange}
-        placeholder={placeholder}
-        value={value}
-      />
-      <button className={button} onClick={onButtonClick} />
+      <input className={input} onChange={onChange} placeholder={placeholder} />
+      <button className={button} onClick={onClick} />
       <SuggestionList {...otherProps} theme={{ ...otherThemeProps }} />
     </Fragment>
   );
@@ -43,11 +42,10 @@ function Autocomplete({
 Autocomplete.propTypes = {
   isCollapsed: PropTypes.bool,
   isLoading: PropTypes.bool,
-  onButtonClick: PropTypes.func,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
   onItemClick: PropTypes.func,
   onRef: PropTypes.func,
-  onValueChange: PropTypes.func,
   placeholder: PropTypes.string,
   setIsCollapsed: PropTypes.func,
   setRef: PropTypes.func,
@@ -58,23 +56,20 @@ Autocomplete.propTypes = {
     suggestedList: PropTypes.string,
     suggestedItem: PropTypes.string,
   }),
-  value: PropTypes.string,
 };
 
 Autocomplete.defaultProps = {
   isCollapsed: true,
   isLoading: false,
-  onButtonClick: () => {},
   onChange: () => {},
+  onClick: () => {},
   onItemClick: () => {},
   onRef: () => {},
-  onValueChange: () => {},
   placeholder: null,
   setIsCollapsed: () => {},
   setRef: () => {},
   suggestedItems: null,
   theme: null,
-  value: null,
 };
 
 export default enhance(Autocomplete);
