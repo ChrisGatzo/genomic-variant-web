@@ -36,6 +36,7 @@
     "react-dev-utils": "5.0.1",
     "react-dom": "16.3.1",
     "react-redux": "5.0.7",
+    "recompose": "0.27.0",
     "redux": "3.7.2",
     "redux-observable": "0.18.0",
     "reselect": "3.0.1",
@@ -70,7 +71,9 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js",
       "<rootDir>/config/enzyme.js"
@@ -84,10 +87,11 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-        "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -102,7 +106,11 @@
     ]
   },
   "babel": {
-    "presets": ["react", "es2015", "stage-1"]
+    "presets": [
+      "react",
+      "es2015",
+      "stage-1"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
