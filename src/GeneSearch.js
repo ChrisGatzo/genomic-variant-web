@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect/es';
 import {
   autoComplete as autoCompleteActionCreator,
   autoCompleteClear as autoCompleteClearActionCreator,
@@ -108,15 +109,15 @@ class GeneSearch extends Component {
 }
 
 export default connect(
-  state => ({
-    genes: getGenes(state),
-    isAutoCompleteLoading: getIsAutoCompleteLoading(state),
-    isSearchInProgress: getSearchInProgress(state),
-    suggestedGenes: getSuggestedGenes(state),
+  createStructuredSelector({
+    genes: getGenes,
+    isAutoCompleteLoading: getIsAutoCompleteLoading,
+    isSearchInProgress: getSearchInProgress,
+    suggestedGenes: getSuggestedGenes,
   }),
-  dispatch => ({
-    autoComplete: searchTerm => dispatch(autoCompleteActionCreator(searchTerm)),
-    autoCompleteClear: () => dispatch(autoCompleteClearActionCreator()),
-    searchGenes: searchTerm => dispatch(searchGenesActionCreator(searchTerm)),
-  }),
+  {
+    autoComplete: autoCompleteActionCreator,
+    autoCompleteClear: autoCompleteClearActionCreator,
+    searchGenes: searchGenesActionCreator,
+  },
 )(GeneSearch);
