@@ -1,34 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { compose, lifecycle, withHandlers, withState } from 'recompose';
-
-const isCollapsible = compose(
-  withState('isCollapsed', 'setIsCollapsed', true),
-  withHandlers(() => {
-    let element = null;
-    return {
-      onRef: () => ref => {
-        element = ref;
-      },
-      handleClickOutside: props => event => {
-        if (element && !element.contains(event.target)) {
-          props.setIsCollapsed(true);
-        }
-      },
-    };
-  }),
-  lifecycle({
-    componentDidMount() {
-      document.addEventListener('mousedown', this.props.handleClickOutside);
-    },
-    componentWillUnmount() {
-      document.removeEventListener('mousedown', this.props.handleClickOutside);
-    },
-  }),
-);
+import { compose, withHandlers } from 'recompose';
+import { withClickOutside } from '../../enhancers/withClickOutside';
+import SuggestionList from './suggestion-list';
 
 const enhance = compose(
-  isCollapsible,
+  withClickOutside,
   withHandlers(() => ({
     onItemClick: ({ onItemClick, setIsCollapsed }) => event => {
       setIsCollapsed(true);
@@ -42,16 +19,12 @@ const enhance = compose(
 );
 
 function Autocomplete({
-  isCollapsed,
-  isLoading,
-  onButtonClick,
-  onItemClick,
-  onRef,
   onValueChange,
   placeholder,
-  suggestedItems,
-  theme: { button, input, suggestedList, suggestedItem },
   value,
+  theme: { button, input, ...otherThemeProps },
+  onButtonClick,
+  ...otherProps
 }) {
   return (
     <Fragment>
@@ -62,22 +35,7 @@ function Autocomplete({
         value={value}
       />
       <button className={button} onClick={onButtonClick} />
-      {!isCollapsed &&
-        suggestedItems &&
-        suggestedItems.length > 0 && (
-          <ul ref={onRef} className={suggestedList}>
-            {suggestedItems.map((g, i) => (
-              <li key={i} className={suggestedItem} onClick={onItemClick}>
-                {g}
-              </li>
-            ))}
-          </ul>
-        )}
-      {isLoading && (
-        <ul className={suggestedList}>
-          <li className={suggestedItem}>autocomplete in progress...</li>
-        </ul>
-      )}
+      <SuggestionList {...otherProps} theme={{ ...otherThemeProps }} />
     </Fragment>
   );
 }
