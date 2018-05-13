@@ -1,49 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './search.css';
+import Autocomplete from '../autocomplete/autocomplete';
 
 export default function Search({
   isAutoCompleteLoading,
-  isSuggestionBoxActive,
   onChange,
   onClick,
   onSuggestionClick,
   placeholder,
   searchTerm,
-  setRef,
   suggestedGenes,
 }) {
   return (
     <div className={styles.search}>
       <div className={styles.searchWrapper}>
-        <input
-          className={styles.input}
+        <Autocomplete
+          isLoading={isAutoCompleteLoading}
+          onButtonClick={onClick}
           onChange={onChange}
+          onItemClick={onSuggestionClick}
           placeholder={placeholder}
+          suggestedItems={suggestedGenes}
+          theme={{
+            button: styles.searchButton,
+            input: styles.input,
+            suggestedList: styles.suggestedList,
+            suggestedItem: styles.suggestedItem,
+          }}
           value={searchTerm}
         />
-        <button className={styles.searchButton} onClick={onClick} />
-        {suggestedGenes &&
-          isSuggestionBoxActive && (
-            <ul ref={setRef} className={styles.suggestionBox}>
-              {suggestedGenes.map((g, i) => (
-                <li
-                  key={i}
-                  className={styles.suggestedGene}
-                  onClick={onSuggestionClick}
-                >
-                  {g}
-                </li>
-              ))}
-            </ul>
-          )}
-        {isAutoCompleteLoading && (
-          <ul className={styles.suggestionBox}>
-            <li className={styles.suggestedGene}>
-              autocomplete in progress...
-            </li>
-          </ul>
-        )}
       </div>
     </div>
   );
@@ -51,13 +37,11 @@ export default function Search({
 
 Search.propTypes = {
   isAutoCompleteLoading: PropTypes.bool.isRequired,
-  isSuggestionBoxActive: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   onSuggestionClick: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   searchTerm: PropTypes.string,
-  setRef: PropTypes.func.isRequired,
   suggestedGenes: PropTypes.arrayOf(PropTypes.string),
 };
 

@@ -33,22 +33,7 @@ class GeneSearch extends Component {
   };
 
   state = {
-    isSuggestionBoxActive: false,
     searchTerm: '',
-  };
-
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
-  handleClickOutside = event => {
-    if (this.childInput && !this.childInput.contains(event.target)) {
-      this.setState({ isSuggestionBoxActive: false });
-    }
   };
 
   handleSearchClick = () => {
@@ -63,25 +48,19 @@ class GeneSearch extends Component {
     const { autoComplete, autoCompleteClear } = this.props;
     autoCompleteClear();
     autoComplete(searchTerm);
-    this.setState({ isSuggestionBoxActive: true });
   };
 
   onSuggestionClick = e => {
     this.setState(
       {
-        isSuggestionBoxActive: false,
         searchTerm: e.target.innerText,
       },
       () => this.handleSearchClick(),
     );
   };
 
-  setRef = input => {
-    this.childInput = input;
-  };
-
   render() {
-    const { isSuggestionBoxActive, searchTerm } = this.state;
+    const { searchTerm } = this.state;
     const {
       genes,
       isAutoCompleteLoading,
@@ -96,8 +75,6 @@ class GeneSearch extends Component {
           onClick={this.handleSearchClick}
           onSuggestionClick={this.onSuggestionClick}
           isAutoCompleteLoading={isAutoCompleteLoading}
-          isSuggestionBoxActive={isSuggestionBoxActive}
-          setRef={this.setRef}
           suggestedGenes={suggestedGenes}
           searchTerm={searchTerm}
         />
