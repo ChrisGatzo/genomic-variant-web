@@ -32,35 +32,22 @@ class GeneSearch extends Component {
     suggestedGenes: null,
   };
 
-  state = {
-    searchTerm: '',
-  };
-
-  handleSearchClick = () => {
+  handleSearchClick = value => {
     const { searchGenes } = this.props;
-    const { searchTerm } = this.state;
-    searchGenes(searchTerm);
+    searchGenes(value);
   };
 
-  onChange = e => {
-    const searchTerm = e.target.value;
-    this.setState({ searchTerm });
+  onChange = value => {
     const { autoComplete, autoCompleteClear } = this.props;
     autoCompleteClear();
-    autoComplete(searchTerm);
+    autoComplete(value);
   };
 
-  onSuggestionClick = e => {
-    this.setState(
-      {
-        searchTerm: e.target.innerText,
-      },
-      () => this.handleSearchClick(),
-    );
+  onSuggestionClick = value => {
+    this.handleSearchClick(value);
   };
 
   render() {
-    const { searchTerm } = this.state;
     const {
       genes,
       isAutoCompleteLoading,
@@ -76,7 +63,6 @@ class GeneSearch extends Component {
           onSuggestionClick={this.onSuggestionClick}
           isAutoCompleteLoading={isAutoCompleteLoading}
           suggestedGenes={suggestedGenes}
-          searchTerm={searchTerm}
         />
         {isSearchInProgress && <p>search in progress...</p>}
         {!isSearchInProgress && genes && <GeneList genes={genes} />}

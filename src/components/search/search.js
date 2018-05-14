@@ -9,7 +9,6 @@ export default function Search({
   onClick,
   onSuggestionClick,
   placeholder,
-  searchTerm,
   suggestedGenes,
 }) {
   return (
@@ -17,7 +16,7 @@ export default function Search({
       <div className={styles.searchWrapper}>
         <Autocomplete
           isLoading={isAutoCompleteLoading}
-          onButtonClick={onClick}
+          onClick={onClick}
           onChange={onChange}
           onItemClick={onSuggestionClick}
           placeholder={placeholder}
@@ -28,7 +27,6 @@ export default function Search({
             suggestedList: styles.suggestedList,
             suggestedItem: styles.suggestedItem,
           }}
-          value={searchTerm}
         />
       </div>
     </div>
@@ -41,12 +39,10 @@ Search.propTypes = {
   onClick: PropTypes.func.isRequired,
   onSuggestionClick: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  searchTerm: PropTypes.string,
   suggestedGenes: PropTypes.arrayOf(PropTypes.string),
 };
 
 Search.defaultProps = {
   placeholder: 'Search for genes',
-  searchTerm: undefined,
   suggestedGenes: null,
 };
