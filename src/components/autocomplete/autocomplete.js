@@ -18,7 +18,9 @@ const enhance = compose(
     onChange: ({ onChange, setIsCollapsed, setValue }) => e => {
       setIsCollapsed(false);
       setValue(e.target.value);
-      onChange(e.target.value);
+      if (onChange) {
+        onChange(e.target.value);
+      }
     },
   })),
 );
@@ -69,7 +71,7 @@ Autocomplete.defaultProps = {
   setIsCollapsed: () => {},
   setRef: () => {},
   suggestedItems: null,
-  theme: null,
+  theme: {},
 };
 
 export default enhance(Autocomplete);
