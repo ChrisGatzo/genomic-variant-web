@@ -3,7 +3,7 @@ const express = require('express');
 const serverless = require('serverless-http');
 const rewriteRules = require('./routes.json')
 const app = express();
-const data = require('./data.js')
+const data = require('./data/data.js')
 
 const bodyParser = require('body-parser');
 var jsonServer = require('json-server');

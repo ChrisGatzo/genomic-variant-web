@@ -4,7 +4,7 @@
 // const validateZipCode = require('../cypress/fixtures/validateZipCode.json')
 // const requisition = require('../cypress/fixtures/requisition.json')
 
-const genes = require('../src/mocks/genes')
+const genes = require('../../src/mocks/genes')
 
 module.exports = () => {
   return {
