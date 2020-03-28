@@ -10,7 +10,7 @@ import {
   searchGenesSuccess,
 } from '../actions/search';
 
-const api = process.env.apiServer || 'localhost:3000';
+const api = process.env.REACT_API_SERVER || 'localhost:3000';
 
 export function loadAutoCompleteEpic(action$, store, deps) {
   return action$.pipe(
