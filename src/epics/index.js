@@ -8,7 +8,7 @@ import {
   searchGenesSuccess,
 } from '../actions/search';
 
-const api = 'http://localhost:5000/api';
+const api = 'https://private-3c0e94-jordangarcia.apiary-mock.com/api';
 
 export function loadAutoCompleteEpic(action$, store, deps) {
   return action$
