@@ -20,23 +20,31 @@ export function loadAutoCompleteEpic(action$, store, deps) {
       const loading = of(autoCompleteLoading(true));
 
       const request = deps.ajax
-        .getJSON(`${api}/genes/autocomplete?searchTerm=${payload}`).pipe(
-        takeUntil(action$.ofType(SEARCH_FETCH)),
-        map(response => autoCompleteSuccess(response)));
+        .getJSON(`${api}/genes/autocomplete?searchTerm=${payload}`)
+        .pipe(
+          takeUntil(action$.ofType(SEARCH_FETCH)),
+          map(response => autoCompleteSuccess(response)),
+        );
 
       return concat(loading, request);
-    }));
+    }),
+  );
 }
 
 export function loadGenesEpic(action$, store, deps) {
   return action$.pipe(
     ofType(SEARCH_FETCH),
     filter(action => action.payload !== ''),
-    mergeMap(({ payload }) =>
-      deps.ajax
+    mergeMap(({ payload }) => {
+      console.log(payload);
+      console.log(
+        deps.ajax.getJSON(`${api}/genes/search?searchTerm=${payload}`),
+      );
+      return deps.ajax
         .getJSON(`${api}/genes/search?searchTerm=${payload}`)
-        .map(response => searchGenesSuccess(response)),
-    ));
+        .map(response => searchGenesSuccess(response));
+    }),
+  );
 }
 
 export const rootEpic = combineEpics(loadAutoCompleteEpic, loadGenesEpic);
