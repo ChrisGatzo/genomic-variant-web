@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 import { combineEpics } from 'redux-observable';
 import {
   AUTO_COMPLETE_FETCH,
@@ -14,10 +15,10 @@ export function loadAutoCompleteEpic(action$, store, deps) {
   return action$
     .ofType(AUTO_COMPLETE_FETCH)
     .filter(action => action.payload && action.payload.length > 1)
-    .mergeMap(({ payload }) => {
+    .mergeMap(async ({ payload }) => {
       const loading = Observable.of(autoCompleteLoading(true));
 
-      const request = deps.ajax
+      ajax
         .getJSON(`${api}/genes/autocomplete?searchTerm=${payload}`)
         .takeUntil(action$.ofType(SEARCH_FETCH))
         .map(response => autoCompleteSuccess(response));
@@ -31,7 +32,7 @@ export function loadGenesEpic(action$, store, deps) {
     .ofType(SEARCH_FETCH)
     .filter(action => action.payload !== '')
     .mergeMap(({ payload }) =>
-      deps.ajax
+      ajax
         .getJSON(`${api}/genes/search?searchTerm=${payload}`)
         .map(response => searchGenesSuccess(response)),
     );
