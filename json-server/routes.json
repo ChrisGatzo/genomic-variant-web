@@ -1,0 +1,4 @@
+{
+    "/api/genes/autocomplete/": "/autocomplete",
+    "/api/genes/search": "/genes"
+}

@@ -12,21 +12,21 @@ import {
 
 const api = 'http://localhost:3000/api';
 
-export function loadAutoCompleteEpic(action$, store, deps) {
-  return action$.pipe(
-    ofType(AUTO_COMPLETE_FETCH),
-    filter(action => action.payload && action.payload.length > 1),
-    mergeMap(({ payload }) => {
-      const loading = of(autoCompleteLoading(true));
+// export function loadAutoCompleteEpic(action$, store, deps) {
+//   return action$.pipe(
+//     ofType(AUTO_COMPLETE_FETCH),
+//     filter(action => action.payload && action.payload.length > 1),
+//     mergeMap(({ payload }) => {
+//       const loading = of(autoCompleteLoading(true));
 
-      const request = deps.ajax
-        .getJSON(`${api}/genes/autocomplete?searchTerm=${payload}`).pipe(
-        takeUntil(action$.ofType(SEARCH_FETCH)),
-        map(response => autoCompleteSuccess(response)));
+//       const request = deps.ajax
+//         .getJSON(`${api}/genes/autocomplete?searchTerm=${payload}`).pipe(
+//         takeUntil(action$.ofType(SEARCH_FETCH)),
+//         map(response => autoCompleteSuccess(response)));
 
-      return concat(loading, request);
-    }));
-}
+//       return concat(loading, request);
+//     }));
+// }
 
 export function loadGenesEpic(action$, store, deps) {
   return action$.pipe(
@@ -34,9 +34,9 @@ export function loadGenesEpic(action$, store, deps) {
     filter(action => action.payload !== ''),
     mergeMap(({ payload }) =>
       deps.ajax
-        .getJSON(`${api}/genes/search?searchTerm=${payload}`)
-        .map(response => searchGenesSuccess(response)),
+        .getJSON(`${api}/genes/search?searchTerm=${payload}`).pipe(
+        map(response => searchGenesSuccess(response)))
     ));
 }
 
-export const rootEpic = combineEpics(loadAutoCompleteEpic, loadGenesEpic);
+export const rootEpic = combineEpics(loadGenesEpic);

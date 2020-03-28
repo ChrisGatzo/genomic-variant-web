@@ -1,4 +1,4 @@
-export const genes = [
+const genes = [
   {
     gene: null,
     nucleotideChange: null,
@@ -2491,3 +2491,5 @@ export const genes = [
     Assembly: null,
   },
 ];
+
+module.exports = genes
