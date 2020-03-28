@@ -10,7 +10,7 @@ import {
   searchGenesSuccess,
 } from '../actions/search';
 
-const api = 'https://private-3c0e94-jordangarcia.apiary-mock.com/api';
+const api = process.env.REACT_API_SEVER;
 
 export function loadAutoCompleteEpic(action$, store, deps) {
   return action$.pipe(
