@@ -34,8 +34,7 @@ export function loadGenesEpic(action$, store, deps) {
     filter(action => action.payload !== ''),
     mergeMap(({ payload }) =>
       deps.ajax
-        .getJSON(`${api}/genes/search?searchTerm=${payload}`)
-        .map(response => searchGenesSuccess(response)),
+        .getJSON(`${api}/genes/search?searchTerm=${payload}`).pipe(map(response => searchGenesSuccess(response)))
     ));
 }
 
