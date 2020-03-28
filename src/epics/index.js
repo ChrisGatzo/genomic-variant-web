@@ -28,18 +28,14 @@ export function loadAutoCompleteEpic(action$, store, deps) {
     }));
 }
 
-
 export function loadGenesEpic(action$, store, deps) {
   return action$.pipe(
     ofType(SEARCH_FETCH),
     filter(action => action.payload !== ''),
-    mergeMap(({ payload }) => {
-      const request = deps.ajax
-        .getJSON(`${api}/genes/search?searchTerm=${payload}`).pipe(
-        map(response => searchGenesSuccess(response)));
-
-      return request;
-    }));
+    mergeMap(({ payload }) =>
+      deps.ajax
+        .getJSON(`${api}/genes/search?searchTerm=${payload}`).pipe(map(response => searchGenesSuccess(response)))
+    ));
 }
 
-export const rootEpic = combineEpics(loadAutoCompleteEpic);
+export const rootEpic = combineEpics(loadAutoCompleteEpic, loadGenesEpic);
