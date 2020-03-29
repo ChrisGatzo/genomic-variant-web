@@ -1,5 +1,4 @@
 'use strict';
-const path = require('path');
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 var jsonServer = require('json-server');
