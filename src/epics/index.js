@@ -10,7 +10,7 @@ import {
   searchGenesSuccess,
 } from '../actions/search';
 
-const api = 'http://localhost:3000/api';
+const api = '/.netlify/functions/server/api';
 
 // export function loadAutoCompleteEpic(action$, store, deps) {
 //   return action$.pipe(
