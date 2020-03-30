@@ -2,3 +2,4 @@
   command = "yarn install && yarn run build-server && yarn build"
   publish = "build"
   functions = "functions"
+  REACT_APP_API_URL = "/.netlify/functions/server/api"
