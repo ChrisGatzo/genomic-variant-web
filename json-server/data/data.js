@@ -1,4 +1,4 @@
-const genes = require('../../src/mocks/genes')
+const genes = require('./genes')
 
 module.exports = () => {
   return {

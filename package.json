@@ -71,14 +71,16 @@
     "prettier": "2.0.2",
     "webpack": "4.42.1",
     "webpack-dev-server": "3.10.3",
-    "webpack-manifest-plugin": "2.2.0"
+    "webpack-manifest-plugin": "2.2.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "start-server": "nodemon server-local.js",
-    "build-server": "netlify-lambda build json-server"
+    "start-server": "node server-local.js",
+    "build-server": "netlify-lambda build --config ./webpack.functions.js json-server",
+    "lambda": "netlify-lambda serve --config ./webpack.functions.js json-server"
   },
   "jest": {
     "collectCoverageFrom": [
